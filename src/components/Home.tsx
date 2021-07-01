@@ -1,5 +1,5 @@
 import { Carousel, Col, Container, Row } from "react-bootstrap";
-import dishes from "../data/menu.json";
+import dishesData from "../data/menu.json";
 import { useState } from "react";
 import DishComments from "./DishComments";
 import upperName from "../helpers/lib";
@@ -23,6 +23,7 @@ export interface Dish {
     date: string;
   }[];
 }
+const dishes: Dish[] = dishesData;
 
 const Home = ({ title }: myProps) => {
   const [selected, setSelected] = useState<Dish | null>(null);

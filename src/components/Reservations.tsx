@@ -6,7 +6,7 @@ import ReservationForm from "./ReservationForm";
 import { Reservation } from "../types/interfaces";
 
 const Reservations = () => {
-  const [reservations, setReservations] = useState([]);
+  const [reservations, setReservations] = useState<Reservation[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
 
@@ -34,17 +34,16 @@ const Reservations = () => {
           <h3>RESERVATIONS:</h3>
           {isLoading && <Loading />}
           {isError && <Error />}
-          {reservations.length === 0 &&
-          isLoading === false &&
-          isError === false ? (
+          {reservations && isLoading === false && isError === false ? (
             <p>NO RESERVATIONS</p>
           ) : (
             <ListGroup>
-              {reservations.map((reservation: Reservation) => (
-                <ListGroup.Item key={reservation._id}>
-                  {reservation.name}
-                </ListGroup.Item>
-              ))}
+              {reservations &&
+                reservations.map((reservation) => (
+                  <ListGroup.Item key={reservation._id}>
+                    {reservation.name}
+                  </ListGroup.Item>
+                ))}
             </ListGroup>
           )}
         </Col>
